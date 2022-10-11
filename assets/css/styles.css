@@ -2,6 +2,7 @@
 	--pink-bg: #b07289;
 	--white: #fff;
 	--black: #111;
+	--gray: #6f6f6f;
 	--buttons-color: #e53170;
 
 	--high-bg: #fceef5;
@@ -33,7 +34,7 @@
 	width: 26.25rem;
 	height: 56.25rem;
 	box-shadow: var(--container-box-shadow);
-	border-radius: 23.3889px;
+	border-radius: 1.5rem;
 	position: relative;
 }
 
@@ -93,6 +94,55 @@
 .card__delete {
 	cursor: pointer;
 	width: 32px;
+	z-index: 1;
+}
+
+.create-container {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 2;
+
+	display: none;
+}
+
+.active {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.create {
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+.create__form {
+	padding-bottom: 1rem;
+}
+
+.create__label {
+	padding-bottom: 8px;
+}
+
+.create__textarea {
+	padding: 8px;
+	resize: none;
+}
+
+.create__textarea,
+.create__select {
+	border: solid 2px var(--gray);
+	border-radius: 4px;
+}
+
+.create__textarea:focus-visible,
+.create__select:focus-visible {
+	outline: none;
 }
 
 @media (max-width: 500px) {
