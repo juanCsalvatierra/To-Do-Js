@@ -1,0 +1,15 @@
+:root {
+	--pink-bg: #b07289;
+	--white: #fff;
+	--black: #111;
+	--buttons-color: #e53170;
+
+	--high-bg: #fceef5;
+	--high-color: #571032;
+	--med-bg: #f9e2eb;
+	--med-color: #b6718b;
+	--low-bg: #f8f2f4;
+	--low-color: #dc9fbc;
+
+	--box-shadow: 0px 0px 9.35556px #e6e6e6;
+}
