@@ -17,12 +17,29 @@
 		<link rel="stylesheet" href="./assets/css/styles.css" />
 	</head>
 	<body>
-		<main>
+		<main class="main">
 			<div class="app-container">
 				<div class="app">
-					<div class="app__h3">To Do List</div>
-					<div class="app__content"></div>
-					<button class="button app__button">+</button>
+					<div class="app__h2">To Do List</div>
+					<div class="app__content">
+						<div class="card">
+							<div class="card__wrapper">
+								<p class="card__name">Buy groceries</p>
+								<p class="card__tag">High</p>
+							</div>
+							<div class="card__buttons">
+								<div class="card__edit">
+									<img src="./assets/images/edit-button.svg" />
+								</div>
+								<div class="card__delete">
+									<img src="./assets/images/delete-button.svg" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="app__button">
+						<img src="./assets/images/add-button.svg" />
+					</button>
 				</div>
 			</div>
 		</main>
