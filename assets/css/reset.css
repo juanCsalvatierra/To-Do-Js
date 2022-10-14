@@ -66,8 +66,8 @@ q:after {
 }
 
 ::selection {
-	background-color: var(--negro);
-	color: var(--blanco);
+	background-color: #111;
+	color: #fff;
 }
 
 form,
