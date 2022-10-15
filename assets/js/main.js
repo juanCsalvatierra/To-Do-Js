@@ -1,32 +1,13 @@
-document.querySelector(".app__button").addEventListener("click", showModal);
-
-function showModal() {
-	document.querySelector(".create-container").classList.add("active");
-
-	addEventClose();
-	addCreateListener();
-}
-
-function addEventClose() {
+window.onload = () => {
 	document
-		.querySelector(".create__close")
-		.addEventListener("click", closeModal);
-}
-
-function closeModal() {
-	document.querySelector(".create-container").classList.remove("active");
-}
-
-function addCreateListener() {
-	document
-		.querySelector(".create__button")
-		.addEventListener("click", createNewTodo);
-}
+		.querySelector("#app-button")
+		.addEventListener("click", openCreateModal);
+};
 
 function createNewTodo() {
 	const textAreaValue = document.querySelector(".create__textarea").value;
-	const select = document.querySelector(".create__select");
-	const selectValue = select.options[select.selectedIndex].value;
+	const $select = document.querySelector(".create__select");
+	const selectValue = $select.options[$select.selectedIndex].value;
 
 	const checkResult = checkIfEmpty(textAreaValue, selectValue);
 
@@ -54,20 +35,50 @@ function createNewTodo() {
 
 	$card.innerHTML = todoTemplate;
 	$appContainer.append($card);
-	clearModal();
+	clearInput();
+	clearSelect();
 	closeModal();
+	addListenersTodo($card);
 }
 
-function checkIfEmpty(textAreaValue, selectValue) {
-	if (textAreaValue === "") {
-		return 1;
-	}
+function addListenersTodo($card) {
+	$card.addEventListener("click", completeTodo);
+	$card
+		.querySelector(".card__edit")
+		.addEventListener("click", () => editTodo($card));
+	$card.querySelector(".card__delete").addEventListener("click", deleteTodo);
+
+	// document.querySelectorAll(".card").forEach(($e) => {
+	// 	$e.addEventListener("click", completeTodo);
+	// 	$e.querySelector(".card__edit").addEventListener("click", editTodo);
+	// 	$e.querySelector(".card__delete").addEventListener("click", deleteTodo);
+	// });
 }
 
-function showInputEmptyError() {
-	console.log("ERROR: input is empty.");
+function editTodo($card) {
+	openEditModal();
+
+	// const $card = event.target.parentNode.parentNode.parentNode;
+	const nameContent = $card.querySelector(".card__name").textContent;
+	const tagContent = $card.querySelector(".card__tag").textContent;
+
+	document.querySelector(".create__textarea").value = nameContent;
+	document.querySelector(".create__select").value = tagContent;
+
+	document.querySelector("#edit-button").addEventListener("click", () => {
+		console.log($card);
+	});
 }
 
-function clearModal() {
-	document.querySelector(".create__textarea").value = "";
+function confirmEdit($card) {
+	const $select = document.querySelector(".create__select");
+	const selectValue = $select.options[$select.selectedIndex].value;
+	const textAreaValue = document.querySelector(".create__textarea").value;
+
+	$card.querySelector(".card__name").textContent = textAreaValue;
+	$card.querySelector(".card__tag").textContent = selectValue;
+
+	clearInput();
+	clearSelect();
+	closeModal();
 }

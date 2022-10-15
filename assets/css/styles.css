@@ -128,13 +128,17 @@
 	align-items: center;
 }
 
-.create__button {
-	background-color: var(--buttons-color);
+.button {
 	border-radius: 5px;
 	padding: 8px 16px;
 	color: var(--white);
 	font-weight: 500;
 	cursor: pointer;
+	background-color: var(--buttons-color);
+}
+
+.edit-button {
+	display: none;
 }
 
 .create {
@@ -165,6 +169,14 @@
 .create__textarea:focus-visible,
 .create__select:focus-visible {
 	outline: none;
+}
+
+.complete-todo {
+	opacity: 0.6;
+}
+
+.complete-todo .card__name {
+	text-decoration: line-through;
 }
 
 @media (max-width: 500px) {

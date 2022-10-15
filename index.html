@@ -16,15 +16,16 @@
 		<link rel="stylesheet" href="./assets/css/reset.css" />
 		<link rel="stylesheet" href="./assets/css/styles.css" />
 
+		<script src="./assets/js/functions.js" defer></script>
 		<script src="./assets/js/main.js" defer></script>
 	</head>
 	<body>
 		<main class="main">
 			<div class="app-container">
 				<div class="app">
-					<div class="create-container">
+					<div class="create-container" id="modal-container">
 						<div class="create">
-							<button class="create__close">🗙</button>
+							<button class="create__close" id="modal-close">🗙</button>
 							<div class="create__form">
 								<label class="create__label" for="task-name">Task name</label>
 								<textarea
@@ -36,19 +37,31 @@
 								></textarea>
 							</div>
 							<div class="create__form">
-								<label class="create__label" for="task-tag">Select tag</label>
+								<label class="create__label" for="task-tag"
+									>Select priority</label
+								>
 								<select class="create__select" name="tag" id="tag">
+									<option selected="priority">-- select --</option>
 									<option value="high">high</option>
 									<option value="mid">mid</option>
 									<option value="low">low</option>
 								</select>
 							</div>
-							<button class="create__button">Create</button>
+							<button
+								type="button"
+								class="button create__button"
+								id="create-button"
+							>
+								Create
+							</button>
+							<button type="button" class="button edit-button" id="edit-button">
+								Edit
+							</button>
 						</div>
 					</div>
 					<div class="app__h2">To Do List</div>
 					<div class="app__content"></div>
-					<button class="app__button">
+					<button class="app__button" id="app-button">
 						<img src="./assets/images/add-button.svg" />
 					</button>
 				</div>
