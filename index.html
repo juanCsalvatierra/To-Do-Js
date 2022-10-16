@@ -41,7 +41,7 @@
 									>Select priority</label
 								>
 								<select class="modal__select" name="tag" id="tag">
-									<option selected="priority">-- select --</option>
+									<option selected="select-tag">-- select tag --</option>
 									<option value="high">high</option>
 									<option value="mid">mid</option>
 									<option value="low">low</option>
@@ -54,12 +54,19 @@
 							>
 								Create
 							</button>
-							<button type="button" class="btn modal__btn-edit" id="btn-edit">
-								Edit
-							</button>
 						</div>
 					</div>
-					<div class="app__h2">To Do List</div>
+					<div class="app__headline">
+						<h2 class="app__h2">To Do List</h2>
+						<div class="app__filter-container filter">
+							<select class="filter__select" name="filter" id="filter-tag">
+								<option selected="filter">-- select filter --</option>
+								<option value="high-to-low">high to low</option>
+								<option value="low-to-high">low to high</option>
+								<option value="not-completed">not completed</option>
+							</select>
+						</div>
+					</div>
 					<div class="app__content"></div>
 					<button class="app__btn" id="btn-app">
 						<img src="./assets/images/add-button.svg" />

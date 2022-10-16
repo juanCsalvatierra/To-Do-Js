@@ -1,8 +1,8 @@
 let todos = [];
 
-window.onload = () => {
-	document.querySelector("#btn-app").addEventListener("click", openCreateModal);
-};
+window.addEventListener("load", () => {
+	document.querySelector("#btn-app").addEventListener("click", showModal);
+});
 
 function createNewTodo() {
 	const $select = document.querySelector("#tag");
@@ -18,6 +18,7 @@ function createNewTodo() {
 		todoName: textAreaValue,
 		todoTag: selectValue,
 		todoId: todos.length,
+		completed: false,
 	};
 
 	todos.push(todoInfo);
@@ -39,8 +40,8 @@ function renderNewTodo(todo) {
 			<p class="card__tag">${todo.todoTag}</p>
 		</div>
 		<div class="card__buttons">
-			<div class="card__edit" id="todo-edit">
-				<img src="./assets/images/edit-button.svg" />
+			<div class="card__complete" id="todo-complete">
+				<img src="./assets/images/complete-button.svg" />
 			</div>
 			<div class="card__delete" id="todo-delete">
 				<img src="./assets/images/delete-button.svg" />
@@ -54,8 +55,22 @@ function renderNewTodo(todo) {
 
 function addTodoListeners() {
 	document.querySelectorAll(".card").forEach(($el) => {
+		$el.querySelector("#todo-complete").addEventListener("click", completeTodo);
 		$el.querySelector("#todo-delete").addEventListener("click", deleteTodo);
 	});
+}
+
+function completeTodo(e) {
+	const $todo = e.target.parentNode.parentNode.parentNode;
+	const todoElementId = parseInt($todo.getAttribute("id"));
+
+	todos.forEach((todo) => {
+		if (todo.todoId === todoElementId) {
+			todo.completed = true;
+		}
+	});
+
+	checkTodoElement($todo);
 }
 
 function deleteTodo(e) {
