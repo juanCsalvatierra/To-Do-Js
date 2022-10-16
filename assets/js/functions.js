@@ -2,7 +2,10 @@ function openCreateModal() {
 	showModal();
 	showCreateBtn();
 	hideEditBtn();
-	addCreateListener();
+
+	document
+		.querySelector("#btn-create")
+		.addEventListener("click", createNewTodo);
 }
 
 function openEditModal() {
@@ -13,11 +16,6 @@ function openEditModal() {
 
 function showModal() {
 	document.querySelector("#modal-container").classList.add("active");
-
-	addEventClose();
-}
-
-function addEventClose() {
 	document.querySelector("#modal-close").addEventListener("click", closeModal);
 }
 
@@ -27,20 +25,14 @@ function closeModal() {
 	clearSelect();
 }
 
-function addCreateListener() {
-	document
-		.querySelector("#create-button")
-		.addEventListener("click", createNewTodo);
-}
-
 function checkIfEmpty(textAreaValue, selectValue) {
-	if (textAreaValue === "") {
+	if (textAreaValue === "" || selectValue === "-- select --") {
 		return 1;
 	}
 }
 
-function showInputEmptyError() {
-	console.log("ERROR: input is empty.");
+function showEmptyError() {
+	console.log("ERROR: complete all fields");
 }
 
 function completeTodo(e) {
@@ -50,29 +42,27 @@ function completeTodo(e) {
 }
 
 function clearInput() {
-	document.querySelector(".create__textarea").value = "";
+	document.querySelector(".modal__textarea").value = "";
 }
 
 function clearSelect() {
-	const $select = document.querySelector(".create__select");
+	const $select = document.querySelector(".modal__select");
 	const selectDefault = $select.options[0].value;
 	$select.options.selectedIndex = selectDefault;
 }
 
-function deleteTodo() {}
-
 function showCreateBtn() {
-	document.querySelector(".create__button").style.display = "block";
+	document.querySelector("#btn-create").style.display = "block";
 }
 
 function hideCreateBtn() {
-	document.querySelector(".create__button").style.display = "none";
+	document.querySelector("#btn-create").style.display = "none";
 }
 
 function showEditBtn() {
-	document.querySelector(".edit-button").style.display = "block";
+	document.querySelector("#btn-edit").style.display = "block";
 }
 
 function hideEditBtn() {
-	document.querySelector(".edit-button").style.display = "none";
+	document.querySelector("#btn-edit").style.display = "none";
 }

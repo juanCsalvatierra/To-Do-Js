@@ -23,24 +23,24 @@
 		<main class="main">
 			<div class="app-container">
 				<div class="app">
-					<div class="create-container" id="modal-container">
-						<div class="create">
-							<button class="create__close" id="modal-close">🗙</button>
-							<div class="create__form">
-								<label class="create__label" for="task-name">Task name</label>
+					<div class="modal-container" id="modal-container">
+						<div class="modal">
+							<button class="modal__close" id="modal-close">🗙</button>
+							<div class="modal__form">
+								<label class="modal__label" for="task-name">Task name</label>
 								<textarea
-									class="create__textarea"
+									class="modal__textarea"
 									name="task-name"
 									id="task-name"
 									cols="30"
 									rows="4"
 								></textarea>
 							</div>
-							<div class="create__form">
-								<label class="create__label" for="task-tag"
+							<div class="modal__form">
+								<label class="modal__label" for="task-tag"
 									>Select priority</label
 								>
-								<select class="create__select" name="tag" id="tag">
+								<select class="modal__select" name="tag" id="tag">
 									<option selected="priority">-- select --</option>
 									<option value="high">high</option>
 									<option value="mid">mid</option>
@@ -49,19 +49,19 @@
 							</div>
 							<button
 								type="button"
-								class="button create__button"
-								id="create-button"
+								class="btn modal__bt-create"
+								id="btn-create"
 							>
 								Create
 							</button>
-							<button type="button" class="button edit-button" id="edit-button">
+							<button type="button" class="btn modal__btn-edit" id="btn-edit">
 								Edit
 							</button>
 						</div>
 					</div>
 					<div class="app__h2">To Do List</div>
 					<div class="app__content"></div>
-					<button class="app__button" id="app-button">
+					<button class="app__btn" id="btn-app">
 						<img src="./assets/images/add-button.svg" />
 					</button>
 				</div>
