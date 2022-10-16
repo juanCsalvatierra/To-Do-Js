@@ -1,6 +1,6 @@
 # To-Do-Js
 
-To-Do list con **vanilla JS**.Arrays, manejo de DOM y localStorage
+To-Do list con **Vanilla JS**. Arrays, manejo de DOM y localStorage
 
 ## Links
 
