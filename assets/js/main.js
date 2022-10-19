@@ -2,12 +2,14 @@ let todos = [];
 
 window.addEventListener("load", () => {
 	document.querySelector("#btn-app").addEventListener("click", showModal);
+	document.querySelector("#sort-by").addEventListener("change", sortTodos);
 });
 
 function createNewTodo() {
 	const $select = document.querySelector("#tag");
 	const selectValue = $select.options[$select.selectedIndex].value;
 	const textAreaValue = document.querySelector("#task-name").value;
+	const todoPriorityIndex = $select.options.selectedIndex;
 
 	if (checkIfEmpty(textAreaValue, selectValue) === 1) {
 		showEmptyError();
@@ -18,8 +20,11 @@ function createNewTodo() {
 		todoName: textAreaValue,
 		todoTag: selectValue,
 		todoId: todos.length,
+		todoPriority: todoPriorityIndex,
 		completed: false,
 	};
+
+	console.log(todoInfo);
 
 	todos.push(todoInfo);
 
@@ -51,32 +56,58 @@ function renderNewTodo(todo) {
 	`;
 
 	$appContainer.insertAdjacentHTML("beforeend", $todoTemplate);
+	addTodoListeners();
 }
 
-function addTodoListeners() {
-	document.querySelectorAll(".card").forEach(($el) => {
-		$el.querySelector("#todo-complete").addEventListener("click", completeTodo);
-		$el.querySelector("#todo-delete").addEventListener("click", deleteTodo);
-	});
+function sortTodos(e) {
+	value = e.target.value;
+
+	if (value === "high-to-low") {
+		sortHighToLow();
+		return;
+	}
+
+	if (value === "low-to-high") {
+		sortLowToHigh();
+		return;
+	}
+
+	if (value === "not-completed") {
+		sortNotComplete();
+		return;
+	}
 }
 
-function completeTodo(e) {
-	const $todo = e.target.parentNode.parentNode.parentNode;
-	const todoElementId = parseInt($todo.getAttribute("id"));
-
-	todos.forEach((todo) => {
-		if (todo.todoId === todoElementId) {
-			todo.completed = true;
+function sortHighToLow() {
+	const highToLow = todos.sort((a, b) => {
+		if (a.todoPriority === b.todoPriority) {
+			return 0;
 		}
+		if (a.todoPriority > b.todoPriority) {
+			return -1;
+		}
+		return 1;
 	});
 
-	checkTodoElement($todo);
+	clearHtml();
+	highToLow.forEach((todo) => renderNewTodo(todo));
 }
 
-function deleteTodo(e) {
-	const $todo = e.target.parentNode.parentNode.parentNode;
-	const todoElementId = parseInt($todo.getAttribute("id"));
+function sortLowToHigh() {
+	const lowToHigh = todos.sort((a, b) => {
+		if (a.todoPriority === b.todoPriority) {
+			return 0;
+		}
+		if (a.todoPriority < b.todoPriority) {
+			return -1;
+		}
+		return 1;
+	});
 
-	todos = todos.filter((todo) => todo.todoId !== todoElementId);
-	$todo.remove();
+	clearHtml();
+	lowToHigh.forEach((todo) => renderNewTodo(todo));
+}
+
+function sortNotComplete() {
+	console.log("not-completed");
 }

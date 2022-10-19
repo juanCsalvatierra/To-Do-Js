@@ -182,7 +182,7 @@
 
 .modal__textarea:focus-visible,
 .modal__select:focus-visible,
-.filter__select:focus-visible {
+.sort__select:focus-visible {
 	outline: none;
 }
 
