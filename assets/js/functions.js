@@ -54,7 +54,12 @@ function completeTodo(e) {
 
 	todos.forEach((todo) => {
 		if (todo.todoId === todoElementId) {
-			todo.completed = true;
+			if (todo.completed) {
+				todo.completed = false;
+			} else {
+				todo.completed = true;
+			}
+			console.log(todo);
 		}
 	});
 
