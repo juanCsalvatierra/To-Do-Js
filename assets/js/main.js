@@ -24,8 +24,6 @@ function createNewTodo() {
 		completed: false,
 	};
 
-	console.log(todoInfo);
-
 	todos.push(todoInfo);
 
 	renderNewTodo(todoInfo);
@@ -39,7 +37,7 @@ function renderNewTodo(todo) {
 	const $appContainer = document.querySelector(".app__content");
 
 	const $todoTemplate = `
-	<div class="card" id=${todo.todoId}>
+	<div class="card ${todo.completed ? "complete-todo" : null}" id=${todo.todoId}>
 		<div class="card__wrapper">
 			<p class="card__name">${todo.todoName}</p>
 			<p class="card__tag">${todo.todoTag}</p>
@@ -109,5 +107,23 @@ function sortLowToHigh() {
 }
 
 function sortNotComplete() {
-	console.log("not-completed");
+	const done = [];
+	const notDone = [];
+	let sortTodo = [];
+
+	todos.forEach((todo) => {
+		if (todo.completed) {
+			done.push(todo);
+		} else {
+			notDone.push(todo);
+		}
+	});
+
+	sortTodo = [...notDone, ...done];
+
+	clearHtml();
+
+	sortTodo.forEach((todo) => {
+		renderNewTodo(todo);
+	});
 }

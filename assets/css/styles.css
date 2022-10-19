@@ -76,6 +76,7 @@
 	padding: 1rem 1.5rem;
 	border-radius: 11px;
 	box-shadow: var(--card-box-shadow);
+	transition: opacity 0.2s;
 
 	display: flex;
 	justify-content: space-between;
@@ -188,6 +189,7 @@
 
 .complete-todo {
 	opacity: 0.6;
+	transition: opacity 0.2s;
 }
 
 .complete-todo .card__name {
