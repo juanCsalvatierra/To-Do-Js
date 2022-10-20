@@ -64,6 +64,7 @@ function completeTodo(e) {
 	});
 
 	checkTodoElement($todo);
+	sincronizationStorage();
 }
 
 function deleteTodo(e) {
@@ -72,4 +73,83 @@ function deleteTodo(e) {
 
 	todos = todos.filter((todo) => todo.todoId !== todoElementId);
 	$todo.remove();
+	sincronizationStorage();
+}
+
+function sincronizationStorage() {
+	localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function renderExistingTodos(todosArg) {
+	todosArg.forEach((todo) => {
+		renderNewTodo(todo);
+	});
+}
+
+function sortTodos(e) {
+	value = e.target.value;
+
+	if (value === "high-to-low") {
+		sortHighToLow();
+		return;
+	}
+
+	if (value === "low-to-high") {
+		sortLowToHigh();
+		return;
+	}
+
+	if (value === "not-completed") {
+		sortNotComplete();
+		return;
+	}
+}
+
+function sortHighToLow() {
+	const highToLow = todos.sort((a, b) => {
+		if (a.todoPriority === b.todoPriority) {
+			return 0;
+		}
+		if (a.todoPriority > b.todoPriority) {
+			return -1;
+		}
+		return 1;
+	});
+
+	clearHtml();
+	renderExistingTodos(highToLow);
+}
+
+function sortLowToHigh() {
+	const lowToHigh = todos.sort((a, b) => {
+		if (a.todoPriority === b.todoPriority) {
+			return 0;
+		}
+		if (a.todoPriority < b.todoPriority) {
+			return -1;
+		}
+		return 1;
+	});
+
+	clearHtml();
+	renderExistingTodos(lowToHigh);
+}
+
+function sortNotComplete() {
+	const done = [];
+	const notDone = [];
+	let sortTodo = [];
+
+	todos.forEach((todo) => {
+		if (todo.completed) {
+			done.push(todo);
+		} else {
+			notDone.push(todo);
+		}
+	});
+
+	sortTodo = [...notDone, ...done];
+
+	clearHtml();
+	renderExistingTodos(sortTodo);
 }

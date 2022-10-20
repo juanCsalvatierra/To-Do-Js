@@ -3,6 +3,9 @@ let todos = [];
 window.addEventListener("load", () => {
 	document.querySelector("#btn-app").addEventListener("click", showModal);
 	document.querySelector("#sort-by").addEventListener("change", sortTodos);
+
+	todos = JSON.parse(localStorage.getItem("todos")) || [];
+	renderExistingTodos(todos);
 });
 
 function createNewTodo() {
@@ -31,13 +34,16 @@ function createNewTodo() {
 	clearSelect();
 	closeModal();
 	addTodoListeners();
+	sincronizationStorage();
 }
 
 function renderNewTodo(todo) {
 	const $appContainer = document.querySelector(".app__content");
 
 	const $todoTemplate = `
-	<div class="card ${todo.completed ? "complete-todo" : null}" id=${todo.todoId}>
+	<div class="${todo.completed ? "card complete-todo" : "card"}" id=${
+		todo.todoId
+	}>
 		<div class="card__wrapper">
 			<p class="card__name">${todo.todoName}</p>
 			<p class="card__tag">${todo.todoTag}</p>
@@ -55,75 +61,4 @@ function renderNewTodo(todo) {
 
 	$appContainer.insertAdjacentHTML("beforeend", $todoTemplate);
 	addTodoListeners();
-}
-
-function sortTodos(e) {
-	value = e.target.value;
-
-	if (value === "high-to-low") {
-		sortHighToLow();
-		return;
-	}
-
-	if (value === "low-to-high") {
-		sortLowToHigh();
-		return;
-	}
-
-	if (value === "not-completed") {
-		sortNotComplete();
-		return;
-	}
-}
-
-function sortHighToLow() {
-	const highToLow = todos.sort((a, b) => {
-		if (a.todoPriority === b.todoPriority) {
-			return 0;
-		}
-		if (a.todoPriority > b.todoPriority) {
-			return -1;
-		}
-		return 1;
-	});
-
-	clearHtml();
-	highToLow.forEach((todo) => renderNewTodo(todo));
-}
-
-function sortLowToHigh() {
-	const lowToHigh = todos.sort((a, b) => {
-		if (a.todoPriority === b.todoPriority) {
-			return 0;
-		}
-		if (a.todoPriority < b.todoPriority) {
-			return -1;
-		}
-		return 1;
-	});
-
-	clearHtml();
-	lowToHigh.forEach((todo) => renderNewTodo(todo));
-}
-
-function sortNotComplete() {
-	const done = [];
-	const notDone = [];
-	let sortTodo = [];
-
-	todos.forEach((todo) => {
-		if (todo.completed) {
-			done.push(todo);
-		} else {
-			notDone.push(todo);
-		}
-	});
-
-	sortTodo = [...notDone, ...done];
-
-	clearHtml();
-
-	sortTodo.forEach((todo) => {
-		renderNewTodo(todo);
-	});
 }
